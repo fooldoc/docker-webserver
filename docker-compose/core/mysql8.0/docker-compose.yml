@@ -1,0 +1,7 @@
+version: "3"
+services:
+  core_mysql8.0:
+    image: core/mysql8.0:v1
+    build:
+       context: ../../../docker-file/core/mysql8.0
+       dockerfile: Dockerfile

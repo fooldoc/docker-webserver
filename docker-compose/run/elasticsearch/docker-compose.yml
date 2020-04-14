@@ -1,0 +1,13 @@
+version: "3"
+services:
+#  https://hub.docker.com/layers/elasticsearch/library/elasticsearch/5.5.2-alpine/images/sha256-e5a0a6044f71be0fa35f2964f926ae17d915a156b7e6ff4263a5fd31e9f164fb
+  elasticsearch5.5.2:
+    image: elasticsearch:5.5.2-alpine
+    ports:
+    - "9200:9200"
+    - "9300:9300"
+#使用web服务这个网络,这样就可以互通了
+networks:
+  default:
+    external:
+      name: web_networks

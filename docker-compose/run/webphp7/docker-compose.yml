@@ -1,0 +1,47 @@
+version: "3"
+#声明一个网络名称,最终网络名称= 项目名称_networks  =>  web_networks ; docker network ls查看
+networks:
+  networks:
+services:
+  php7apache24:
+    image: run/php7apache24:v1
+    build:
+       context: ../../../docker-file/run/php7apache24
+       dockerfile: Dockerfile
+    volumes:
+      - /web:/web
+      - /web/webconfig:/work/webconfig
+    environment:
+         #ifconfig docker0的ip自己修改
+      - HOST_IP=172.17.0.1
+    #使用某个网络
+    networks:
+    - networks
+  nginx:
+    image: run/nginx1.8:v1
+    build:
+       context: ../../../docker-file/run/nginx1.8
+       dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - /web:/web
+      - /web/webconfig:/work/webconfig
+    links:
+      - php7apache24:php7
+    #使用某个网络
+    networks:
+    - networks
+  mysql8.0:
+    image: run/mysql8.0:v1
+    build:
+       context: ../../../docker-file/run/mysql8.0
+       dockerfile: Dockerfile
+    ports:
+      - "3306:3306"
+    environment:
+    #ifconfig docker0的ip自己修改
+      - HOST_IP=172.17.0.1
+    #使用某个网络
+    networks:
+    - networks

@@ -1,0 +1,7 @@
+version: "3"
+services:
+  core_nginx1.8:
+    image: core/nginx1.8:v1
+    build:
+       context: ../../../docker-file/core/nginx1.8
+       dockerfile: Dockerfile

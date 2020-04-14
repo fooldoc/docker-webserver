@@ -1,0 +1,22 @@
+version: "3"
+services:
+  base_nginx1.8:
+    image: base/nginx1.8:v1
+    build:
+      context: ../../docker-file/base/nginx1.8
+      dockerfile: Dockerfile
+  base_php54apache24:
+    image: base/php54apache24:v1
+    build:
+      context: ../../docker-file/base/php54apache24
+      dockerfile: Dockerfile
+  base_php7apache24:
+    image: base/php7apache24:v1
+    build:
+      context: ../../docker-file/base/php7apache24
+      dockerfile: Dockerfile
+  base_mysql8.0:
+    image: base/mysql8.0:v1
+    build:
+      context: ../../docker-file/base/mysql8.0
+      dockerfile: Dockerfile

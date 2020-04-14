@@ -1,0 +1,7 @@
+version: "3"
+services:
+  core_php54apache24:
+    image: core/php54apache24:v1
+    build:
+       context: ../../../docker-file/core/php54apache24
+       dockerfile: Dockerfile

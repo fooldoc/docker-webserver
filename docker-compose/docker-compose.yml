@@ -1,0 +1,75 @@
+#https://blog.csdn.net/qq_36148847/article/details/79427878
+#https://docs.docker.com/compose/compose-file/
+# 指定 compose 文件的版本
+version: "3"
+services:
+  nginx:
+    image: nginx/nginx1.8:v2
+    build:
+    #context 选项可以是 Dockerfile 的文件路径，也可以是到链接到 git 仓库的 url
+    # 当提供的值是相对路径时，它被解析为相对于撰写文件的路径，此目录也是发送到 Docker 守护进程的 context
+        context: .
+        #根据对应的 Dockerfile 构建指定 Stage
+        target: prod
+        #设定上下文根目录，然后以该目录为准指定 Dockerfile
+        dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    #等同docker --env RACK_ENV=development
+    environment:
+      - RACK_ENV=development
+    #等同docker run  --link php54:php54
+    #链接到 docker-compose.yml 外部的容器，甚至 并非 Compose 项目文件管理的容器。参数格式跟 links 类似
+    #在使用Docker过程中，会有许多单独使用 docker run 启动的容器的情况，为了使 Compose
+    #能够连接这些不在docker-compose.yml 配置文件中定义的容器，那么就需要一个特殊的标签，
+    #就是 external_links，它可以让Compose 项目里面的容器连接到那些项目配置外部的容器
+    #（前提是外部容器中必须至少有一个容器是连接到与项目内的服务的同一个网络里面）。
+    external_links:
+     - redis_1ya
+     #链接到其它服务的中的容器，可以指定服务名称也可以指定链接别名（SERVICE：ALIAS)，与 Docker 客户端的 --link 有一样效果，会连接到其它服务中的容器
+    #第一个是compose的名称，第二个是要在里面使用的变量
+    links:
+       - db
+       - db:database
+       - redis
+    #用于检查测试服务使用的容器是否正常
+    healthcheck:
+    # test: ["CMD", "curl", "-f", "http://localhost"]
+      test: ["CMD-SHELL", "curl -f http://localhost || exit 1"]
+      interval: 1m30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    #从其它容器或者服务挂载数据卷，可选的参数是 :ro 或 :rw，前者表示容器只读，后者表示容器对数据卷是可读可写的（默认情况为可读可写的）。
+    volumes_from:
+      - service_name
+      - service_name:ro
+      - container:container_name
+      - container:container_name:rw
+    volumes:
+    #挂载一个目录或者一个已存在的数据卷容器，可以直接使用 HOST:CONTAINER 这样的格式，或者使用
+    #HOST:CONTAINER:ro 这样的格式，后者对于容器来说，数据卷是只读的，这样可以有效保护宿主机的文件系统
+      # 只是指定一个路径，Docker 会自动在创建一个数据卷（这个路径是容器内部的）。
+      - /var/lib/mysql
+
+      # 使用绝对路径挂载数据卷
+      - /opt/data:/var/lib/mysql
+
+      # 以 Compose 配置文件为中心的相对路径作为数据卷挂载到容器。
+      - ./cache:/tmp/cache
+
+      # 使用用户的相对路径（~/ 表示的目录是 /home/<用户目录>/ 或者 /root/）。
+      #ro 只读！！
+      - ~/configs:/etc/configs/:ro
+
+      # 已经存在的命名的数据卷。
+      - datavolume:/var/lib/mysql
+    deploy:
+        #此例子中 服务限制使用不超过 50M 的内存和 0.50（50％）可用处理时间（CPU），并且 保留 20M 了内存和 0.25 CPU时间
+          resources:
+            limits:
+              cpus: '0.50'
+              memory: 50M
+            reservations:
+              cpus: '0.25'
+              memory: 20M

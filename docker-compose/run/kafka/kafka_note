@@ -1,0 +1,87 @@
+1.查看版本号
+执行以下命令查看容器中的kafka版本号：
+docker exec kafka_kafka_1 find / -name \*kafka_\* | head -1 | grep -o '\kafka[^\n]*'
+
+上述命令执行后，我这边控制台显示kafka_2.11-0.11.0.3，这表示Scala 的版本为2.11，kafka的版本是0.11.0.3；
+2. 执行以下命令查看zookeeper版本：
+
+docker exec kafka-kafka_zookeeper_1 pwd
+
+上述命令执行后，我这边控制台显示/opt/zookeeper-3.4.9，这表示zookeeper的版本为3.4.9；
+
+扩展broker
+在docker-compose.yml所在的文件夹下，执行以下命令即可将borker总数从1个扩展到4个：
+docker-compose scale kafka=4
+
+
+执行命令docker ps，可见kafka容器已经扩展到4个：
+[root@hedy kafka-docker]# docker ps
+CONTAINER ID        IMAGE                    COMMAND                  CREATED             STATUS              PORTS                                                NAMES
+adf18015a95e        kafka-docker_kafka       "start-kafka.sh"         6 seconds ago       Up 3 seconds        0.0.0.0:32771->9092/tcp                              kafka-docker_kafka_2
+d7eb1a9c9c72        kafka-docker_kafka       "start-kafka.sh"         6 seconds ago       Up 3 seconds        0.0.0.0:32770->9092/tcp                              kafka-docker_kafka_4
+0dddf1728ebd        kafka-docker_kafka       "start-kafka.sh"         6 seconds ago       Up 4 seconds        0.0.0.0:32769->9092/tcp                              kafka-docker_kafka_3
+19bc31339915        wurstmeister/zookeeper   "/bin/sh -c '/usr/..."   23 minutes ago      Up 23 minutes       22/tcp, 2888/tcp, 3888/tcp, 0.0.0.0:2181->2181/tcp   kafka-docker_zookeeper_1
+11bbf5c6ebec        kafka-docker_kafka       "start-kafka.sh"         23 minutes ago      Up 23 minutes       0.0.0.0:32768->9092/tcp                              kafka-docker_kafka_1
+
+接下来实战消息的生产和消费；
+
+创建topic
+创建一个topic，名为topic001，4个partition，副本因子2，执行以下命令即可：
+
+docker exec kafka_kafka_1 \
+kafka-topics.sh \
+--create --topic kafka_go_test \
+--partitions 2 \
+--zookeeper zookeeper:2181 \
+--replication-factor 1
+
+
+执行以下命令查看刚刚创建的topic，这次在容器kafka-docker_kafka_3上执行命令试试：
+
+docker exec kafka_kafka_1 \
+kafka-topics.sh --list \
+--zookeeper zookeeper:2181
+
+
+可见刚刚创建的topic可以被查到；
+3. 查看刚刚创建的topic的情况，borker和副本情况一目了然，如下：
+
+docker exec kafka_kafka_1 \
+ kafka-topics.sh \
+ --describe \
+ --topic yxh-breaker \
+ --zookeeper zookeeper:2181
+
+
+Topic:topic001	PartitionCount:4	ReplicationFactor:2	Configs:
+	Topic: topic001	Partition: 0	Leader: 1002	Replicas: 1002,1003	Isr: 1002,1003
+	Topic: topic001	Partition: 1	Leader: 1003	Replicas: 1003,1004	Isr: 1003,1004
+	Topic: topic001	Partition: 2	Leader: 1004	Replicas: 1004,1001	Isr: 1004,1001
+	Topic: topic001	Partition: 3	Leader: 1001	Replicas: 1001,1002	Isr: 1001,1002
+
+消费消息
+执行如下命令，即可进入等待topic为test消息的状态：
+
+#单节点的消费消息方式
+docker exec kafka_kafka_1 \
+kafka-console-consumer.sh \
+--topic yxh-breaker \
+--bootstrap-server kafka_kafka_1:9092
+
+
+#多台节点的消费消息方式
+docker exec kafka_kafka_1 \
+kafka-console-consumer.sh \
+--topic topic001 \
+--bootstrap-server kafka-docker_kafka_1:9092,kafka-docker_kafka_2:9092,kafka-docker_kafka_3:9092,kafka-docker_kafka_4:9092
+
+目前还没有生产消息，因此控制台不会有内容输出，接下来尝试生产消息；
+
+生产消息
+打开一个新的窗口，执行如下命令，进入生产消息的命令行模式，注意不要漏掉参数"-it"，我之前就是因为漏掉了参数"-it"，导致生产的消息时虽然不提示异常，但是始终无法消费到消息：
+docker exec -it kafka_kafka_1 \
+kafka-console-producer.sh \
+--topic kafka_go_test  \
+--broker-list kafka_kafka_1:9092
+
+现在已经进入了生产消息的命令行模式，输入一些字符串然后回车，再去消费消息的控制台窗口看看，已经有消息打印出来，说明消息的生产和消费都成功了；

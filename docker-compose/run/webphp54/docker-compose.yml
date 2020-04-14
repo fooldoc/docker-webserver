@@ -1,0 +1,56 @@
+version: "3"
+#声明一个网络名称,最终网络名称= 项目名称_networks  =>  web_networks ; docker network ls查看
+networks:
+  networks:
+services:
+  php54apache24:
+    image: run/php54apache24:v1
+    build:
+      context: ../../../docker-file/run/php54apache24
+      dockerfile: Dockerfile
+    environment:
+    #ifconfig docker0的ip自己修改
+    - HOST_IP=172.17.0.1
+    volumes:
+    - /www:/www
+    - /tmp:/tmp
+    - /wwwlog:/wwwlog
+    - /var/logs:/var/logs
+    - /web/webconfig/apache/4399/vhost:/usr/local/apache/conf/vhost
+    - /home/lyh/.ssh:/root/.ssh
+    - /data/app/review:/data/app/review
+    - /web/webconfig/host/4399/hosts:/work/webconfig/host/4399/hosts
+    - /web/online_service/config_file:/web/online_service/config_file
+    external_links:
+    - kafka:kafka
+    #使用某个网络
+    networks:
+      - networks
+  nginx:
+    image: run/nginx1.8:v1
+    build:
+      context: ../../../docker-file/run/nginx1.8
+      dockerfile: Dockerfile
+    ports:
+    - "80:80"
+    volumes:
+    - /www:/www
+    - /wwwlog:/wwwlog
+    - /tmp:/tmp
+    - /web/webconfig/nginx/4399/vhost:/usr/local/nginx/conf/vhost
+    links:
+    - php54apache24:php54
+    networks:
+      - networks
+  mysql8.0:
+      image: run/mysql8.0:v1
+      build:
+        context: ../../../docker-file/run/mysql8.0
+        dockerfile: Dockerfile
+      ports:
+      - "3306:3306"
+      environment:
+      #ifconfig docker0的ip自己修改
+      - HOST_IP=172.17.0.1
+      networks:
+        - networks
