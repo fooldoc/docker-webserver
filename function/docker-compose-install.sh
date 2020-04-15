@@ -10,6 +10,7 @@ docker-compose build
 cd $compose_core_dir/php54apache24
 docker-compose build
 cd $compose_run_dir/webphp54
+docker-compose build --no-cache
 docker-compose up -d
 }
 install_php73(){
@@ -22,6 +23,7 @@ docker-compose build
 cd $compose_core_dir/php7apache24
 docker-compose build
 cd $compose_run_dir/webphp7
+docker-compose build --no-cache
 docker-compose up -d
 }
 

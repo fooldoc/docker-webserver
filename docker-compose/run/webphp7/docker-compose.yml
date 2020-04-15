@@ -14,6 +14,8 @@ services:
     environment:
          #ifconfig docker0的ip自己修改
       - HOST_IP=172.17.0.1
+      #host文件路径
+      - HOST_PATH=/work/webconfig/host/4399/hosts
     #使用某个网络
     networks:
     - networks

@@ -1,13 +1,11 @@
 #!/bin/bash
-#可以把hosts文件放到docker容器的的这个位置/work/webconfig/host/4399/hosts
-#注意这个路径是自己外部挂载进来的，这样才能实现宿主机与容器一致
 #然后本地hosts追加一行#-------------这行开始的hosts会被同步到docker-------------------，关键字，这样可以实现本地与docker分开并且hosts可以一致
 #这样就可以解决每次重新start容器，hosts丢失的问题，还能实现本地+docker同步，并且可以备份迁移
 set_hosts(){
 
-if [ -s "/work/webconfig/host/4399/hosts" ]; then
+if [ -s "$HOST_PATH" ]; then
 line=`sed -n '/#-------------这行开始的hosts会被同步到docker-------------------/=' /work/webconfig/host/4399/hosts`
-data=`sed -n "$line,$"p /work/webconfig/host/4399/hosts`
+data=`sed -n "$line,$"p $HOST_PATH`
 cat>>/tmp/hosts<<EOF
 $data
 EOF
@@ -65,12 +63,44 @@ set_php_variable(){
 		echo "$key=$value" >> $php_run_path/etc/php.ini
 	fi
 }
+config_php(){
+	set_php_variable error_log /weblog/php/php_errors.log
+	set_php_variable disable_functions "checkdnsrr,chgrp,chown,chroot,dl,error_log,ftp_connect,ftp_get,ftp_login,ftp_pasv,getmxrr,getservbyname,getservbyport,gzcompress,gzopen,gzpassthru,highlight_file,ini_alter,ini_restore,openlog,passthru,pfsockopen,popen,popepassthru,posix_ctermid,posix_get_last_error,posix_getcwd,posix_getegid,posix_geteuid,posix_getgid,posix_getgrgid,posix_getgrnam,posix_getgroups,posix_getlogin,posix_getpgid,posix_getpgrp,posix_getpid,posix_getppid,posix_getpwnam,posix_getpwuid,posix_getrlimit,posix_getsid,posix_getuid,posix_isatty,posix_kill,posix_mkfifo,posix_setegid,posix_seteuid,posix_setgid,posix_setpgid,posix_setsid,posix_setuid,posix_strerror,posix_times,posix_ttyname,posix_uname,proc_close,proc_get_status,proc_open,readlink,scandir,set_time_limit,show_source,socket_accept,socket_bind,socket_listen,stream_socket_accept,stream_socket_client,stream_socket_server,stream_socket_srver,symlink,syslog,system,zlib.compress"
+	set_php_variable expose_php Off
+	set_php_variable request_order  "CGP"
+	set_php_variable cgi.fix_pathinfo 0
+	set_php_variable date.timezone Asia/ShangHai
+	set_php_variable upload_max_filesize 50M
+	set_php_variable post_max_size 50M
+	set_php_variable error_reporting E_ALL
+	set_php_variable display_errors Off
+	set_php_variable log_errors On
+	set_php_variable log_errors_max_len 1024
+}
+set_disable_ini_php_variable(){
+	local key=$1
+	local value=$2
+	if grep -q -E "^$key\s*=" $php_run_path/etc/php.no_disable.ini;then
+		sed -i -r "s#^$key\s*=.*#$key=$value#" $php_run_path/etc/php.no_disable.ini
+	else
+		sed -i -r "s#;\s*$key\s*=.*#$key=$value#" $php_run_path/etc/php.no_disable.ini
+	fi
 
-set_php_variable disable_functions "checkdnsrr,chgrp,chown,chroot,dl,error_log,ftp_connect,ftp_get,ftp_login,ftp_pasv,getmxrr,getservbyname,getservbyport,gzcompress,gzopen,gzpassthru,highlight_file,ini_alter,ini_restore,openlog,passthru,pfsockopen,popen,popepassthru,posix_ctermid,posix_get_last_error,posix_getcwd,posix_getegid,posix_geteuid,posix_getgid,posix_getgrgid,posix_getgrnam,posix_getgroups,posix_getlogin,posix_getpgid,posix_getpgrp,posix_getpid,posix_getppid,posix_getpwnam,posix_getpwuid,posix_getrlimit,posix_getsid,posix_getuid,posix_isatty,posix_kill,posix_mkfifo,posix_setegid,posix_seteuid,posix_setgid,posix_setpgid,posix_setsid,posix_setuid,posix_strerror,posix_times,posix_ttyname,posix_uname,proc_close,proc_get_status,proc_open,readlink,scandir,set_time_limit,show_source,socket_accept,socket_bind,socket_listen,stream_socket_accept,stream_socket_client,stream_socket_server,stream_socket_srver,symlink,syslog,system,zlib.compress"
+	if ! grep -q -E "^$key\s*=" $php_run_path/etc/php.no_disable.ini;then
+		echo "$key=$value" >> $php_run_path/etc/php.no_disable.ini
+	fi
+}
 
+config_php_no_disable_ini(){
+   set_disable_ini_php_variable	memory_limit 256M
+   set_disable_ini_php_variable	disable_functions
+   set_disable_ini_php_variable max_execution_time 0
+}
+
+config_php
+config_php_no_disable_ini
 crond
 
-chown -R web:web /weblog/
 chown -R web:web /var/logs/kafka_event
 
 ${work}/httpd start

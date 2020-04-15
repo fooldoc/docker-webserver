@@ -43,29 +43,6 @@ mkdir -p $apache_run_path/conf/vhost
 chmod 644 $apache_run_path/conf/extra/*
 chmod 644 $apache_run_path/conf/httpd.conf
 
-web_log_path=weblog
-web_path="web"
-mkdir -p /$web_log_path/apache
-mkdir -p /$web_log_path/php
-mkdir -p /$web_log_path/web/dev
-mkdir -p /$web_log_path/web/lct
-mkdir -p /$web_log_path/web/pro
-mkdir -p /$web_log_path/cli/dev
-mkdir -p /$web_log_path/cli/lct
-mkdir -p /$web_log_path/cli/pro
-mkdir -p /$web_log_path/crontab/dev
-mkdir -p /$web_log_path/crontab/lct
-mkdir -p /$web_log_path/crontab/pro
-
-chmod 740 -R /$web_log_path
-chown -R web:web /$web_log_path
-
-mkdir -p /$web_path
-mkdir -p /webresource
-chmod 740 -R /$web_path
-chown -R web:web /$web_path
-chmod 740 -R /webresource
-chown -R web:web /webresource
 
 #-------------php相关设置---------------------------
 php_bin=$php_run_path/bin
