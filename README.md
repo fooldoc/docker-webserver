@@ -122,41 +122,67 @@ PS:安装mysql的时候初始化会卡住几分钟,耐心等待即可
 可自行追加其他命令
 
 ###  使用前配置 ### 
+
 1.打开文件:docker-webserver/config/dockerexec.sh
+
 2.修改开头的两个配置:
+
 1)docker_name改完自己的容器名字
+
 2)map可以自定义其他命令,如果不需要可以保持默认
+
 ###  部署到宿主机快捷命令 ### 
+
 1.将脚本软连接到宿主机下:
+
 sudo ln -s /web/docker-webserver/config/dockerexec.sh /usr/local/bin/dockerexec
+
 chmod +x /usr/local/bin/dockerexec
+
 2.在宿主机测试命令:
+
 dockerexec php -v
 
 ###  使用命令介绍 ### 
+
 1.必须保持宿主机的路径与容器的挂载路径保持一致,这样才能达到便捷使用的目的
+
 2.举个例子比如我在宿主机/tmp下面有个demo.php文件,我想执行这个php文件,正常情况下我们需要到宿主机里面去执行,那么使用该脚本可以这样执行:
 
 方式一:
+
 dockerexec php /tmp/demo.php
+
 \#这个方式是常规的用全路径的,这样执行效率就很差了
 
 方式二:
+
 dockerexec php demo.php .
+
 \#执行这个命令,会变成,跟方式一达到同样的效果:
+
 \#/usr/local/php/bin/php /tmp/demo.php
-只要最后参数加个.我会根据当前宿主机的目录路径帮你追加命令到容器里面,这样效率就很高了,当前前提是你宿主机cd到对应目录,
-正常我们开发的时候为了方便肯定会到宿主机对应的目录下看文件的,所以使用该方式可以便捷的提高效率!
+
+只要最后参数加个.我会根据当前宿主机的目录路径帮你追加命令到容器里面,这样效率就很高了,当前前提是你宿主机cd到对应目录,正常我们开发的时候为了方便肯定会到宿主机对应的目录下看文件的,所以使用该方式可以便捷的提高效率!
 
 接下来再演示下shell命令的:
+
 场景一:tmp目录下面有run.sh文件
+
 dockerexec bash run.sh  .
+
 执行这个命令,会变成:
+
 /bin/bash /tmp/run.sh
+
 场景二:tmp目录下面有run.sh文件和demo.php文件,我的demo.php文件
+
 dockerexec bash run.sh demo.php .
+
 执行这个命令,会变成:
+
 /bin/bash /tmp/run.sh /tmp/demo.php
+
 \#两个都会被自动带上路径传递过去,run.sh是需要传递demo.php参数的这种场景
 
 
@@ -164,9 +190,13 @@ dockerexec bash run.sh demo.php .
 ========
 
 将所有配置搞到私人仓库,举个例子:
+
 .ssh
+
 /etc/hosts
+
 nginx,apache各种配置
+
 全部搞到私人仓库,然后挂载到docker容器里面,这样就高度保持一致的服务,针对hosts文件,可以从私人仓库软连接到宿主机,然后挂载到容器里面,接下来利用我已经处理好的配置一下即可实现,宿主机与容器双向同步了!
 
 
