@@ -12,16 +12,16 @@ services:
     #ifconfig docker0的ip自己修改
     - HOST_IP=172.17.0.1
     #host文件路径
-    - HOST_PATH=/work/webconfig/host/4399/hosts
+    - HOST_PATH=/work/webconfig/host/hosts
     volumes:
     - /www:/www
     - /tmp:/tmp
     - /wwwlog:/wwwlog
     - /var/logs:/var/logs
-    - /web/webconfig/apache/4399/vhost:/usr/local/apache/conf/vhost
+    - /web/webconfig/apache/vhost:/usr/local/apache/conf/vhost
     - /home/lyh/.ssh:/root/.ssh
     - /data/app/review:/data/app/review
-    - /web/webconfig/host/4399/hosts:/work/webconfig/host/4399/hosts
+    - /web/webconfig/host/hosts:/work/webconfig/host/hosts
     - /web/online_service/config_file:/web/online_service/config_file
     external_links:
     - kafka:kafka
@@ -39,7 +39,7 @@ services:
     - /www:/www
     - /wwwlog:/wwwlog
     - /tmp:/tmp
-    - /web/webconfig/nginx/4399/vhost:/usr/local/nginx/conf/vhost
+    - /web/webconfig/nginx/vhost:/usr/local/nginx/conf/vhost
     links:
     - php54apache24:php54
     networks:

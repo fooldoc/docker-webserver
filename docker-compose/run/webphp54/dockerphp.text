@@ -1,6 +1,0 @@
-#不进入docker 直接使用Php 的脚本
-
-sudo ln -s /web/docker/docker-webserver/docker-compose/run/webphp54/dockerphp.sh /usr/local/bin/dockerphp
-chmod +x /usr/local/bin/dockerphp
-
-dockerphp -v

@@ -1,2 +1,0 @@
-#0 0 * * * bash /web/apiDoc/applications/apiDoc/tools/run.sh cronSyncDoc.php 1  > /dev/null 2>&1
-#* * * * * bash /web/apiDoc/applications/apiDoc/tools/run.sh cronSyncDoc.php 2  > /dev/null 2>&1

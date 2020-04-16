@@ -3,6 +3,8 @@
 #   SYSTEM REQUIRED:  docker-webserver
 #   DESCRIPTION:  源码编译docker-webserver
 #   AUTHOR: fooldoc
+#   微信公众号: 傻瓜文档
+#   博客:www.fooldoc.com
 #   EMAIL: 949477774@qq.com
 #   time:2020-02-09
 #===============================================================================

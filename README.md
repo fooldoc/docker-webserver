@@ -53,7 +53,7 @@ run  : run层才是我们真在的应用层
 ### 使用前部署配置 ###
 需要自行修改的配置如下:
 1.docker-compose, run层 应用层肯定是需要大家根据自己的服务来配置的,大家可以参考我的模板自行修改配置,
-针对docker-compose的参数配置,大家可以直接看目录下的all,yml文件和docker-compose.yml涵盖了大部分的配置可以当作文档使用
+针对docker-compose的参数配置,大家可以直接看跟目录下config文件夹里面的的all.yml文件和docker-compose.yml涵盖了大部分的配置可以当作文档使用
 2.另外需要特别修改的几个配置如下:
 1)修改变量IP:
 webphp54+webphp7的 docker-compose.yml
@@ -86,3 +86,13 @@ PS:安装mysql的时候初始化会卡住几分钟,耐心等待即可
 nginx,apache各种配置
 全部搞到私人仓库,然后挂载到docker容器里面,这样就高度保持一致的服务,针对hosts文件,可以从私人仓库软连接到宿主机,
 然后挂载到容器里面,接下来利用我已经处理好的配置一下即可实现,宿主机与容器双向同步了!
+
+#===============================================================================
+#   SYSTEM REQUIRED:  docker-webserver
+#   DESCRIPTION:  源码编译docker-webserver
+#   AUTHOR: fooldoc
+#   微信公众号: 傻瓜文档
+#   博客:www.fooldoc.com
+#   EMAIL: 949477774@qq.com
+#   time:2020-02-09
+#===============================================================================

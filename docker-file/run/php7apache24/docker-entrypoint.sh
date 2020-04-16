@@ -4,7 +4,7 @@
 set_hosts(){
 
 if [ -s "$HOST_PATH" ]; then
-line=`sed -n '/#-------------这行开始的hosts会被同步到docker-------------------/=' /work/webconfig/host/4399/hosts`
+line=`sed -n '/#-------------这行开始的hosts会被同步到docker-------------------/=' $HOST_PATH`
 data=`sed -n "$line,$"p $HOST_PATH`
 cat>>/tmp/hosts<<EOF
 $data
