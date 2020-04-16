@@ -69,6 +69,7 @@ run  : run层才是我们真在的应用层
 ========
 
 需要自行修改的配置如下:
+
 1.docker-compose, run层 应用层肯定是需要大家根据自己的服务来配置的,大家可以参考我的模板自行修改配置,针对docker-compose的参数配置,大家可以直接看跟目录下config文件夹里面的的all.yml文件和docker-compose.yml涵盖了大部分的配置可以当作文档使用
 
 
