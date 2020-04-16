@@ -76,16 +76,16 @@ run  : run层才是我们真在的应用层
 2.另外需要特别修改的几个配置如下:
 
 1)修改变量IP:
+
 webphp54+webphp7的 docker-compose.yml
 有个配置:
+
   environment:
     - HOST_IP=172.17.0.1
 
 
 这个参数是必填的,传递HOST_IP这个参数到容器里面,大家自行执行命令:
-
 ifconfig 
-
 然后查看docker0的ip自己修改填入该项
 
 2)修改host文件同步地址
@@ -93,7 +93,8 @@ ifconfig
 environment:
     - HOST_PATH=/xxx/hosts
 
-这个参数是选填的,主要作用是把你设置路径的hosts文件同步到docker容器里面,可以做到同步宿主机的部分hosts到容器里面解决host双向问题,使用的话就是 hosts文件里面 必须加一行:
+
+这个参数是选填的,主要作用是把你设置路径的hosts文件同步到docker容器里面,可以做到同步宿主机的部分hosts到容器里面解决host双向问题,使用的话就是hosts文件里面 必须加一行:
 
 \#这行开始的hosts会被同步到docker
 
