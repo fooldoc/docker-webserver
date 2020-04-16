@@ -1,10 +1,10 @@
 #!/bin/bash
-#然后本地hosts追加一行#-------------这行开始的hosts会被同步到docker-------------------，关键字，这样可以实现本地与docker分开并且hosts可以一致
+#然后本地hosts追加一行"#这行开始的hosts会被同步到docker"，关键字，这样可以实现本地与docker分开并且hosts可以一致
 #这样就可以解决每次重新start容器，hosts丢失的问题，还能实现本地+docker同步，并且可以备份迁移
 set_hosts(){
 
 if [ -s "$HOST_PATH" ]; then
-line=`sed -n '/#-------------这行开始的hosts会被同步到docker-------------------/=' $HOST_PATH`
+line=`sed -n '/#这行开始的hosts会被同步到docker/=' $HOST_PATH`
 data=`sed -n "$line,$"p $HOST_PATH`
 cat>>/tmp/hosts<<EOF
 $data
