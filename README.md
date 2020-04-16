@@ -23,6 +23,7 @@
 
 安装
 ========
+### 官网地址:[https://www.fooldoc.com/archives/204](https://www.fooldoc.com/archives/204 "https://www.fooldoc.com/archives/204")
 1. 切换到root帐号权限,
 2. 根目录下授权可执行权限:
 chmod +x install.sh
