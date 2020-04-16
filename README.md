@@ -106,15 +106,21 @@ environment:
 
 执行命令:
 bash install.sh
+
 选择安装服务,或者是自己到docker-compose用命令行自主编译启动容器都行,命令行只是便捷操作而已!
+
 PS:安装mysql的时候初始化会卡住几分钟,耐心等待即可
 
 
 实现不进入docker容器可在宿主机执行容器的脚本
 ========
+
 直接执行PHP命令
+
 直接执行shell命令
+
 可自行追加其他命令
+
 ###  使用前配置 ### 
 1.打开文件:docker-webserver/config/dockerexec.sh
 2.修改开头的两个配置:
