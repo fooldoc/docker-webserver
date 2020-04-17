@@ -29,8 +29,18 @@
 chmod +x install.sh
 3. 执行命令:
 bash install.sh
+如图:
+
+![](http://chuantu.xyz/t6/728/1587090598x3661913030.png)
+
+选择1 ,2 
+
 选择安装docker
+
 选择安装docker-compose 
+
+
+
 
 设计说明
 ========
@@ -76,6 +86,11 @@ run  : run层才是我们真在的应用层
 
 2.另外需要特别修改的几个配置如下:
 
+如图参考:
+
+![](http://chuantu.xyz/t6/728/1587091185x3661913030.png)
+
+
 1)修改变量IP:
 
 webphp54+webphp7的 docker-compose.yml
@@ -101,14 +116,20 @@ environment:
 
 加了这行之后,以这行为分割,往下的host都会被同步到docker容器里面,往上的则不会,这样就可以宿主机与容器共用,还能满足宿主机单独的host场景.
 
+如图演示我的hosts:
+
+![](http://chuantu.xyz/t6/728/1587091163x3661913030.png)
 
 开始使用容器服务
 ========
 
 执行命令:
+
 bash install.sh
 
-选择安装服务,或者是自己到docker-compose用命令行自主编译启动容器都行,命令行只是便捷操作而已!
+选择 4,安装服务列表(支持重新编译)
+
+或者是自己到docker-compose用命令行自主编译启动容器都行,命令行只是便捷操作而已!
 
 PS:安装mysql的时候初始化会卡住几分钟,耐心等待即可
 
