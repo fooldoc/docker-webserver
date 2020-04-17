@@ -28,7 +28,9 @@
 2. 根目录下授权可执行权限:
 chmod +x install.sh
 3. 执行命令:
+
 bash install.sh
+
 如图:
 
 ![](http://chuantu.xyz/t6/728/1587090598x3661913030.png)
