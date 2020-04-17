@@ -39,6 +39,7 @@ echo
 echo "SYSTEM REQUIRED:  docker-webserver"
 echo "DESCRIPTION:  源码编译docker-webserver"
 echo "AUTHOR: fooldoc"
+echo "微信公众号: 傻瓜文档"
 echo "EMAIL:949477774@qq.com"
 echo "time:2020-02-09"
 echo "博客：http://www.fooldoc.com"
