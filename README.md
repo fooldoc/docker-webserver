@@ -1,8 +1,9 @@
+
 # docker-webserver:源码编译docker容器服务
 ### github地址: [https://github.com/fooldoc/docker-webserver](https://github.com/fooldoc/docker-webserver "https://github.com/fooldoc/docker-webserver")
 ###  AUTHOR: fooldoc
 ###  微信公众号: 傻瓜文档
-###  博客:www.fooldoc.com
+###  博客:[https://www.fooldoc.com](https://www.fooldoc.com "https://www.fooldoc.com")
 ###  EMAIL: 949477774@qq.com
 支持系统环境
 ========
@@ -32,8 +33,7 @@ chmod +x install.sh
 bash install.sh
 
 如图:
-
-![](http://chuantu.xyz/t6/728/1587090598x3661913030.png)
+![安装页面](https://img-blog.csdnimg.cn/20200421094232957.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxNTE3NDgwMTk1,size_16,color_FFFFFF,t_70)
 
 选择1 ,2 
 
@@ -89,8 +89,7 @@ run  : run层才是我们真在的应用层
 2.另外需要特别修改的几个配置如下:
 
 如图参考:
-
-![](http://chuantu.xyz/t6/728/1587091185x3661913030.png)
+![docker-compose配置页](https://img-blog.csdnimg.cn/20200421094330509.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxNTE3NDgwMTk1,size_16,color_FFFFFF,t_70)
 
 
 1)修改变量IP:
@@ -120,7 +119,7 @@ environment:
 
 如图演示我的hosts:
 
-![](http://chuantu.xyz/t6/728/1587091163x3661913030.png)
+![hosts演示](https://img-blog.csdnimg.cn/20200421094427571.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxNTE3NDgwMTk1,size_16,color_FFFFFF,t_70)
 
 开始使用容器服务
 ========
