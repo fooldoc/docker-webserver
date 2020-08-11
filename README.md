@@ -14,7 +14,7 @@
 功能介绍
 ========
 1. 一键傻瓜式安装docker
-2. 一键傻瓜式安装docker-compose
+2. 一键傻瓜式安装docker-compose(如果被墙直接下载,链接：https://pan.baidu.com/s/1_CVBlYAyuldj3ua0IntCag 提取码：inux)
 3. 一键启动,停止,关闭,编译docker-compose服务,没有docker,docker-compose基础的都可以傻瓜式使用
 4. dockerfile源码编译lnmp,lanmp,php,apache,nginx,mysql,redis,memcached,kafka等各种服务
 5. 适合对象:开发本地环境使用,快速搭建web服务,方便在企业中进行开发等,个人博客站使用,docker兴趣爱好者学习使用
@@ -33,7 +33,7 @@ bash install.sh
 
 如图:
 
-![](https://www.fooldoc.com/wp-content/uploads/2020/04/1587091281-20200417024121.png)
+![](http://chuantu.xyz/t6/728/1587090598x3661913030.png)
 
 选择1 ,2 
 
@@ -90,7 +90,7 @@ run  : run层才是我们真在的应用层
 
 如图参考:
 
-![](https://www.fooldoc.com/wp-content/uploads/2020/04/1587091361-20200417024241.png)
+![](http://chuantu.xyz/t6/728/1587091185x3661913030.png)
 
 
 1)修改变量IP:
@@ -120,7 +120,7 @@ environment:
 
 如图演示我的hosts:
 
-![](https://www.fooldoc.com/wp-content/uploads/2020/04/1587091333-20200417024213.png)
+![](http://chuantu.xyz/t6/728/1587091163x3661913030.png)
 
 开始使用容器服务
 ========
