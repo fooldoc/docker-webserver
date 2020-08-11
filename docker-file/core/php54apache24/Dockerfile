@@ -16,6 +16,18 @@ RUN ln -s /usr/bin/cmake3 /usr/bin/cmake \
 	&& groupadd ${user_group_web} && useradd -g ${user_group_web} ${user_group_web} -M -s /bin/false
 #RUN yum install libtool-ltdl-devel -y
 #-------初始化--------
+#------git2.x安装-----
+ENV git git-2.13.3
+RUN yum install -y perl-ExtUtils-MakeMaker asciidoc xmlto
+RUN ${wgetrun} https://www.kernel.org/pub/software/scm/git/${git}.tar.gz \
+	&& tar zxf ${git}.tar.gz \
+	&& cd ${git} \
+	&& ./configure --prefix=/usr/local/git \
+	&& make \
+	&& make install \
+	&& cd ../ && rm -rf ${git} ${git}.tar.gz \
+	&& rm -rf /usr/bin/git \
+	&& ln -s /usr/local/git/bin/git /usr/bin/git
 # apr
 ENV apr apr-1.6.3
 ENV apr_run_path /usr/local/apr
