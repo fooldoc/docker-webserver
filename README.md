@@ -33,7 +33,7 @@ bash install.sh
 
 如图:
 
-![](http://chuantu.xyz/t6/728/1587090598x3661913030.png)
+![](https://www.fooldoc.com/wp-content/uploads/2020/04/1587091281-20200417024121.png)
 
 选择1 ,2 
 
@@ -90,7 +90,7 @@ run  : run层才是我们真在的应用层
 
 如图参考:
 
-![](http://chuantu.xyz/t6/728/1587091185x3661913030.png)
+![](https://www.fooldoc.com/wp-content/uploads/2020/04/1587091361-20200417024241.png)
 
 
 1)修改变量IP:
@@ -120,7 +120,7 @@ environment:
 
 如图演示我的hosts:
 
-![](http://chuantu.xyz/t6/728/1587091163x3661913030.png)
+![](https://www.fooldoc.com/wp-content/uploads/2020/04/1587091333-20200417024213.png)
 
 开始使用容器服务
 ========
