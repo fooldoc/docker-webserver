@@ -6,12 +6,25 @@ need_root_priv
 
 }
 
-install_docker(){
+install_docker_other(){
 if check_sys packageManager apt;then
     install_docker_ubuntu
 elif check_sys packageManager yum;then
     install_docker_centos
 fi
+}
+
+install_docker_mac(){
+brew cask install docker
+}
+install_docker(){
+if [ "$(uname)" == "Darwin" ];then
+install_docker_mac
+else
+install_docker_other
+fi
+
+
 echo "docker安装完毕"
 }
 

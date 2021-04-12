@@ -9,11 +9,20 @@
 #   time:2020-02-09
 #===============================================================================
 cur_dir=`pwd`
-MemTotal=`free -m | grep Mem | awk '{print  $2}'`
-conf_dir=$cur_dir/conf
+#MemTotal=`free -m | grep Mem | awk '{print  $2}'`
+conf_dir=$cur_dir/config
 compose_base_dir=$cur_dir/docker-compose/base
 compose_core_dir=$cur_dir/docker-compose/core
-compose_run_dir=$cur_dir/docker-compose/run
+
+
+if [ "$(uname)" == "Darwin" ];then
+  MemTotal=`python $conf_dir/mac.py`
+  compose_run_dir=$cur_dir/docker-compose/runmac
+else
+  MemTotal=`free -m | grep Mem | awk '{print  $2}'`
+  compose_run_dir=$cur_dir/docker-compose/run
+fi
+
 #载入函数
 load_functions(){
 	local function=$1
@@ -39,6 +48,7 @@ echo
 echo "SYSTEM REQUIRED:  docker-webserver"
 echo "DESCRIPTION:  源码编译docker-webserver"
 echo "AUTHOR: fooldoc"
+echo "微信公众号: 傻瓜文档"
 echo "EMAIL:949477774@qq.com"
 echo "time:2020-02-09"
 echo "博客：http://www.fooldoc.com"

@@ -1,17 +1,29 @@
 #!/bin/bash
-#然后本地hosts追加一行"#这行开始的hosts会被同步到docker"，关键字，这样可以实现本地与docker分开并且hosts可以一致
+#然后本地hosts追加一行#这行开始的hosts会被同步到docker，关键字，这样可以实现本地与docker分开并且hosts可以一致
 #这样就可以解决每次重新start容器，hosts丢失的问题，还能实现本地+docker同步，并且可以备份迁移
+
+docker_host=""
+#解决mac系统host_ip可以传递docker.for.mac.host.internal来解析出ip
+get_host_ip()
+{
+ADDR=$HOST_IP
+
+TMPSTR=`ping ${ADDR} -c 1 | sed '1{s/[^(]*(//;s/).*//;q}'`
+
+docker_host=${TMPSTR}
+}
+get_host_ip
 set_hosts(){
 
 if [ -s "$HOST_PATH" ]; then
 line=`sed -n '/#这行开始的hosts会被同步到docker/=' $HOST_PATH`
 data=`sed -n "$line,$"p $HOST_PATH`
+rm -rf /tmp/hosts
 cat>>/tmp/hosts<<EOF
 $data
 EOF
 localhost_host="127.0.0.1"
 #这个docker的ip 从外部变量传递过来
-docker_host=$HOST_IP
 sed -i -r "s#$localhost_host\s#$docker_host #" /tmp/hosts
 data=`sed -n "1,$"p /tmp/hosts`
 cat>>/etc/hosts<<EOF
