@@ -173,6 +173,7 @@ dockerexec php -v
 
 2.举个例子比如我在宿主机/tmp下面有个demo.php文件,我想执行这个php文件,正常情况下我们需要到宿主机里面去执行,那么使用该脚本可以这样执行:
 
+
 方式一:
 
 dockerexec php /tmp/demo.php
