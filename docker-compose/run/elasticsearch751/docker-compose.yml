@@ -1,0 +1,16 @@
+version: "3"
+services:
+  #https://www.elastic.co/guide/en/elasticsearch/reference/7.5/docker.html
+  elasticsearch7.5.1:
+    image: run/elasticsearch7.5.1:v1
+    build:
+        context: ../../../docker-file/run/elasticsearch7.5.1
+        dockerfile: Dockerfile
+    ports:
+    - "9200:9200"
+    - "9300:9300"
+#使用web服务这个网络,这样就可以互通了
+networks:
+  default:
+    external:
+      name: web_networks

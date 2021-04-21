@@ -1,0 +1,11 @@
+version: "3"
+services:
+  redis5.0.7:
+    image: redis:5.0.7-alpine
+    ports:
+    - "6380:6380"
+#使用web服务这个网络,这样就可以互通了
+networks:
+  default:
+    external:
+      name: web_networks

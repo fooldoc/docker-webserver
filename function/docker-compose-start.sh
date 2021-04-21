@@ -26,3 +26,13 @@ cd $compose_run_dir/elasticsearch
 docker-compose up -d
 }
 
+
+start_elasticsearch751(){
+cd $compose_run_dir/elasticsearch751
+docker-compose up -d
+}
+
+start_node811(){
+cd $compose_run_dir/node811
+docker-compose up -d
+}

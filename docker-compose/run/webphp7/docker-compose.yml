@@ -6,42 +6,42 @@ services:
   php7apache24:
     image: run/php7apache24:v1
     build:
-       context: ../../../docker-file/run/php7apache24
-       dockerfile: Dockerfile
+      context: ../../../docker-file/run/php7apache24
+      dockerfile: Dockerfile
     volumes:
-      - /tmp:/tmp
+    - /tmp:/tmp
     environment:
-         #ifconfig docker0的ip自己修改
-      - HOST_IP=172.17.0.1
-      #host文件路径
-      - HOST_PATH=/etc/hosts
+    #ifconfig docker0的ip自己修改
+    - HOST_IP=172.17.0.1
+    #host文件路径
+    - HOST_PATH=/etc/hosts
     #使用某个网络
     networks:
     - networks
   nginx:
     image: run/nginx1.8:v1
     build:
-       context: ../../../docker-file/run/nginx1.8
-       dockerfile: Dockerfile
+      context: ../../../docker-file/run/nginx1.8
+      dockerfile: Dockerfile
     ports:
-      - "80:80"
+    - "80:80"
     volumes:
-      - /tmp:/tmp
+    - /tmp:/tmp
     links:
-      - php7apache24:php7
+    - php7apache24:php7
     #使用某个网络
     networks:
     - networks
   mysql8.0:
     image: run/mysql8.0:v1
     build:
-       context: ../../../docker-file/run/mysql8.0
-       dockerfile: Dockerfile
+      context: ../../../docker-file/run/mysql8.0
+      dockerfile: Dockerfile
     ports:
-      - "3306:3306"
+    - "3306:3306"
     environment:
     #ifconfig docker0的ip自己修改
-      - HOST_IP=172.17.0.1
+    - HOST_IP=172.17.0.1
     #使用某个网络
     networks:
     - networks

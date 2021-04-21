@@ -32,3 +32,14 @@ docker-compose stop
 docker-compose rm
 }
 
+remove_elasticsearch751(){
+cd $compose_run_dir/elasticsearch751
+docker-compose stop
+docker-compose rm
+}
+
+remove_node811(){
+cd $compose_run_dir/node811
+docker-compose stop
+docker-compose rm
+}

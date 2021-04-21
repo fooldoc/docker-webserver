@@ -117,7 +117,9 @@ echo "2) 一键安装服务：php5.4+nginx+apache+mysql(注意该服务与上面
 echo "3) 一键安装服务：kafka"
 echo "4) 一键安装服务：memcached"
 echo "5) 一键安装服务：redis"
-echo "6) 一键安装服务：elasticsearch"
+echo "6) 一键安装服务：elasticsearch5.5.2"
+echo "7) 一键安装服务：elasticsearch7.5.1"
+echo "8) 一键安装服务：node8.1.1"
 read menu_select
 case $menu_select in
 1)
@@ -138,6 +140,12 @@ case $menu_select in
 6)
 	install_elasticsearch
         ;;
+7)
+    install_elasticsearch751
+        ;;
+8)
+    install_node811
+        ;;
 esac
 }
 
@@ -153,7 +161,9 @@ echo "2) 一键启动服务：php5.4+nginx+apache+mysql(注意该服务与上面
 echo "3) 一键启动服务：kafka"
 echo "4) 一键启动服务：memcached"
 echo "5) 一键启动服务：redis"
-echo "6) 一键启动服务：elasticsearch"
+echo "6) 一键启动服务：elasticsearch5.5.2"
+echo "7) 一键启动服务：elasticsearch7.5.1"
+echo "8) 一键启动服务：node8.1.1"
 read menu_select
 case $menu_select in
 1)
@@ -174,6 +184,12 @@ case $menu_select in
 6)
 	start_elasticsearch
         ;;
+7)
+	start_elasticsearch751
+        ;;
+8)
+	start_node811
+        ;;
 esac
 }
 
@@ -189,7 +205,9 @@ echo "2) 一键停止服务：php5.4+nginx+apache+mysql(注意该服务与上面
 echo "3) 一键停止服务：kafka"
 echo "4) 一键停止服务：memcached"
 echo "5) 一键停止服务：redis"
-echo "6) 一键停止服务：elasticsearch"
+echo "6) 一键停止服务：elasticsearch5.5.2"
+echo "7) 一键停止服务：elasticsearch7.5.1"
+echo "8) 一键停止服务：node8.1.1"
 read menu_select
 case $menu_select in
 1)
@@ -210,6 +228,12 @@ case $menu_select in
 6)
 	stop_elasticsearch
         ;;
+7)
+	stop_elasticsearch751
+        ;;
+8)
+	stop_node811
+        ;;
 esac
 }
 
@@ -225,7 +249,9 @@ echo "2) 一键删除服务：php5.4+nginx+apache+mysql(注意该服务与上面
 echo "3) 一键删除服务：kafka"
 echo "4) 一键删除服务：memcached"
 echo "5) 一键删除服务：redis"
-echo "6) 一键删除服务：elasticsearch"
+echo "6) 一键删除服务：elasticsearch5.5.2"
+echo "7) 一键删除服务：elasticsearch7.5.1"
+echo "8) 一键删除服务：node8.1.1"
 read menu_select
 case $menu_select in
 1)
@@ -245,6 +271,12 @@ case $menu_select in
         ;;
 6)
 	remove_elasticsearch
+        ;;
+7)
+	remove_elasticsearch751
+        ;;
+8)
+	remove_node811
         ;;
 esac
 }

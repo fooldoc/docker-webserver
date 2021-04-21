@@ -1,0 +1,11 @@
+version: "3"
+services:
+  #https://github.com/wurstmeister/kafka-docker
+  #https://blog.csdn.net/boling_cavalry/article/details/85395080
+  playwright:
+    image: mcr.microsoft.com/playwright:bionic
+networks:
+  default:
+    external:
+      name: web_networks
+      #docker

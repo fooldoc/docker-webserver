@@ -1,0 +1,17 @@
+version: "3"
+services:
+  node811:
+    image: run/node811
+    build:
+        context: ../../../docker-file/run/node811
+        dockerfile: Dockerfile
+    ports:
+    - "9090:9090"
+    - "8000:8000"
+    volumes:
+    - /nodeweb:/nodeweb
+#使用web服务这个网络,这样就可以互通了
+networks:
+  default:
+    external:
+      name: web_networks

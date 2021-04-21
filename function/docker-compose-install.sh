@@ -41,6 +41,19 @@ docker-compose up -d
 }
 install_elasticsearch(){
 cd $compose_run_dir/elasticsearch
+docker-compose build --no-cache
+docker-compose up -d
+}
+install_elasticsearch751(){
+cd $compose_run_dir/elasticsearch751
+docker-compose build --no-cache
+docker-compose up -d
+}
+
+
+install_node811(){
+cd $compose_run_dir/node811
+docker-compose build --no-cache
 docker-compose up -d
 }
 

@@ -26,3 +26,13 @@ cd $compose_run_dir/elasticsearch
 docker-compose stop
 }
 
+stop_elasticsearch751(){
+cd $compose_run_dir/elasticsearch751
+docker-compose stop
+}
+
+
+stop_node811(){
+cd $compose_run_dir/node811
+docker-compose stop
+}

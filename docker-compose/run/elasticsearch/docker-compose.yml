@@ -1,8 +1,11 @@
 version: "3"
 services:
-#  https://hub.docker.com/layers/elasticsearch/library/elasticsearch/5.5.2-alpine/images/sha256-e5a0a6044f71be0fa35f2964f926ae17d915a156b7e6ff4263a5fd31e9f164fb
+  #  https://hub.docker.com/layers/elasticsearch/library/elasticsearch/5.5.2-alpine/images/sha256-e5a0a6044f71be0fa35f2964f926ae17d915a156b7e6ff4263a5fd31e9f164fb
   elasticsearch5.5.2:
-    image: elasticsearch:5.5.2-alpine
+    image: run/elasticsearch5.5.2:v1
+    build:
+        context: ../../../docker-file/run/elasticsearch5.5.2
+        dockerfile: Dockerfile
     ports:
     - "9200:9200"
     - "9300:9300"

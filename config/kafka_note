@@ -30,7 +30,7 @@ d7eb1a9c9c72        kafka-docker_kafka       "start-kafka.sh"         6 seconds 
 
 docker exec kafka_kafka_1 \
 kafka-topics.sh \
---create --topic kafka_go_test \
+--create --topic test \
 --partitions 2 \
 --zookeeper zookeeper:2181 \
 --replication-factor 1
@@ -81,7 +81,7 @@ kafka-console-consumer.sh \
 打开一个新的窗口，执行如下命令，进入生产消息的命令行模式，注意不要漏掉参数"-it"，我之前就是因为漏掉了参数"-it"，导致生产的消息时虽然不提示异常，但是始终无法消费到消息：
 docker exec -it kafka_kafka_1 \
 kafka-console-producer.sh \
---topic kafka_go_test  \
+--topic test  \
 --broker-list kafka_kafka_1:9092
 
 现在已经进入了生产消息的命令行模式，输入一些字符串然后回车，再去消费消息的控制台窗口看看，已经有消息打印出来，说明消息的生产和消费都成功了；

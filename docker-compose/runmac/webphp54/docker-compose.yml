@@ -12,7 +12,7 @@ services:
     #ifconfig docker0的ip自己修改
     - HOST_IP=docker.for.mac.host.internal
     #host文件路径
-#    - HOST_PATH=/etc/hosts
+    - HOST_PATH=/etc/hosts
     volumes:
       - /tmp:/tmp
     external_links:
