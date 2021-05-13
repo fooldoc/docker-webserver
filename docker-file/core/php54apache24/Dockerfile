@@ -92,7 +92,7 @@ RUN ${wgetrun} ${download_cdn}/web/libiconv/${iconv_path}.tar.gz \
 ENV php_path php-5.4.35
 #是否开启是否安装php,fileinfo扩展，请注意查看自己的内存是否大于1G，如果没有请不要安装fileinfo扩展，否则编译报错 --enable-fileinfo  --disable-fileinfo
 ENV with_fileinfo --disable-fileinfo
-RUN ${wgetrun} https://www.php.net/distributions/${php_path}.tar.gz \
+RUN ${wgetrun} http://mirrors.sohu.com/php/${php_path}.tar.gz \
     && tar zxvf ${php_path}.tar.gz -C ${work}/ \
     && cd ${php_path} \
     && ./configure --prefix=${php_run_path} --with-apxs2=${apache_run_path}/bin/apxs --with-config-file-path=${php_run_path}/etc  --enable-sockets --enable-mbstring --with-curl --enable-fpm --enable-zip --with-mcrypt  --enable-gd-native-ttf --with-gettext --enable-ftp --enable-bcmath --with-openssl --with-mhash --enable-soap  --with-iconv-dir=${iconv_run_path} --enable-xml --with-libxml-dir --disable-debug --enable-inline-optimization --disable-rpath --enable-mbregex --enable-shmop --enable-sysvsem --with-mysql=mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --enable-pcntl --with-xmlrpc  --with-gd --with-jpeg-dir --with-zlib --with-png-dir --with-freetype-dir --enable-ctype --enable-session ${with_fileinfo} \
