@@ -111,7 +111,7 @@ ENV php_path php-7.3.14
 
 #是否开启是否安装php,fileinfo扩展，请注意查看自己的内存是否大于1G，如果没有请不要安装fileinfo扩展，否则编译报错 --enable-fileinfo  --disable-fileinfo
 ENV with_fileinfo --disable-fileinfo
-RUN ${wgetrun} https://www.php.net/distributions/${php_path}.tar.gz \
+RUN ${wgetrun} http://mirrors.sohu.com/php/${php_path}.tar.gz \
     && tar zxvf ${php_path}.tar.gz -C ${work}/ \
     && cd ${php_path} \
     && ./configure --prefix=${php_run_path} --with-config-file-path=${php_run_path}/etc --with-config-file-scan-dir=${php_run_path}/conf.d --with-apxs2=${apache_run_path}/bin/apxs --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-iconv-dir=${iconv_run_path} --with-freetype-dir --with-jpeg-dir --with-png-dir --with-zlib --with-libxml-dir --enable-xml --disable-rpath --enable-bcmath --enable-shmop --enable-sysvsem --enable-inline-optimization --with-curl --enable-mbregex --enable-mbstring --enable-intl --enable-pcntl --enable-ftp --with-gd --with-openssl --with-mhash --enable-pcntl --enable-sockets --with-xmlrpc  --enable-soap --with-gettext ${with_fileinfo} --enable-opcache --with-xsl --enable-ctype --enable-session --enable-zip \
