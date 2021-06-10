@@ -14,6 +14,7 @@ RUN yum install -y wget vim bzip2 gcc gcc-c++ automake autoconf libtool make net
 	&& yum install libmcrypt-devel -y \
 	#cron
     && yum install -y crontabs \
+    && yum install -y unzip zip \
 	&& yum clean all
 
 CMD ["/usr/sbin/init"]

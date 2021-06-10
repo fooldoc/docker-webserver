@@ -165,3 +165,16 @@ RUN ${wgetrun} -O ${rdkafka}.tgz http://pecl.php.net/get/${rdkafka}.tgz \
     && make \
     && make install \
     && cd ../ && rm -rf ${rdkafka} ${rdkafka}.tgz
+
+#svn 安装
+ENV svn subversion-1.14.1
+RUN ${wgetrun} http://archive.apache.org/dist/subversion/${svn}.tar.gz \
+    && tar zxvf ${svn}.tar.gz \
+    && ${wgetrun} https://www.sqlite.org/2015/sqlite-amalgamation-3081101.zip \
+    && unzip sqlite-amalgamation-3081101.zip \
+    && mv sqlite-amalgamation-3081101 ${svn}/sqlite-amalgamation \
+    && cd ${svn} \
+    && ./configure --prefix=/usr/local/subversion --with-apr=/usr/local/apr --with-apr-util=/usr/local/apr-util --with-lz4=internal --with-utf8proc=internal \
+    && make \
+    && make install \
+    && cd ../ && rm -rf ${svn} ${svn}.tar.gz

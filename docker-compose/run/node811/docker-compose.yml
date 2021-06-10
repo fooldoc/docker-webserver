@@ -10,6 +10,7 @@ services:
     - "8000:8000"
     volumes:
     - /nodeweb:/nodeweb
+    - /www/gitlab.4399.com/manager:/manager
 #使用web服务这个网络,这样就可以互通了
 networks:
   default:
