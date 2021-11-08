@@ -154,7 +154,7 @@ RUN ${wgetrun} -O ${librdkafka}.tar.gz https://github.com/edenhill/librdkafka/ar
     && ./configure \
     && make \
     && make install \
-    && cd ../ && rm -rf librdkafka.zip
+    && cd ../ && rm -rf ${librdkafka}.tar.gz
 
 ENV rdkafka rdkafka-3.0.5
 RUN ${wgetrun} -O ${rdkafka}.tgz http://pecl.php.net/get/${rdkafka}.tgz \
@@ -178,3 +178,13 @@ RUN ${wgetrun} http://archive.apache.org/dist/subversion/${svn}.tar.gz \
     && make \
     && make install \
     && cd ../ && rm -rf ${svn} ${svn}.tar.gz
+
+ENV mongo mongodb-1.2.11
+RUN ${wgetrun} http://pecl.php.net/get/${mongo}.tgz \
+        && tar zxf ${mongo}.tgz \
+        && cd ${mongo} \
+        && ${php_run_path}/bin/phpize \
+        && ./configure --with-php-config=${php_run_path}/bin/php-config \
+        && make \
+        && make install \
+        && cd ../ && rm -rf ${mongo} && rm -f ${mongo}.tgz

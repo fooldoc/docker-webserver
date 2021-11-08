@@ -174,7 +174,7 @@ RUN ${wgetrun} -O ${librdkafka}.tar.gz https://github.com/edenhill/librdkafka/ar
     && ./configure \
     && make \
     && make install \
-    && cd ../ && rm -rf librdkafka.zip
+    && cd ../ && rm -rf ${librdkafka}.tar.gz
 
 ENV rdkafka rdkafka-4.0.3
 RUN ${wgetrun} -O ${rdkafka}.tgz http://pecl.php.net/get/${rdkafka}.tgz \

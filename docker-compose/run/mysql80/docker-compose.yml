@@ -1,0 +1,27 @@
+version: "3"
+#声明一个网络名称,最终网络名称= 项目名称_networks  =>  web_networks ; docker network ls查看
+networks:
+  networks:
+services:
+  mysql8.0:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    volumes:
+      - /web:/web
+      - /weblog:/weblog
+      #无法挂载！我草！
+      #- /mysqldata:/var/lib/mysql
+      #下面这个目录手动复制数据了
+      - /mysqldata:/mysqldata
+      - /tmp:/tmp
+    environment:
+    #ifconfig docker0的ip自己修改
+      - TZ=Asia/Shanghai
+      - MYSQL_ROOT_PASSWORD=root
+      #- MYSQL_USER=latelee
+      #- MYSQL_PASSWORD=123456
+    command: ['mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci', '--explicit_defaults_for_timestamp=false','--default-authentication-plugin=mysql_native_password']
+    #使用某个网络
+    networks:
+    - networks

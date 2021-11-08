@@ -9,6 +9,11 @@ cd $compose_run_dir/webphp7
 docker-compose up -d
 }
 
+start_php73node16(){
+cd $compose_run_dir/webphp7node
+docker-compose up -d
+}
+
 start_kafka(){
 cd $compose_run_dir/kafka
 docker-compose up -d
@@ -36,3 +41,15 @@ start_node811(){
 cd $compose_run_dir/node811
 docker-compose up -d
 }
+
+start_mysql80(){
+cd $compose_run_dir/mysql80
+docker-compose up -d
+}
+
+
+start_mongo(){
+cd $compose_run_dir/mongo
+docker-compose up -d
+}
+

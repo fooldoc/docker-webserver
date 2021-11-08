@@ -120,6 +120,9 @@ echo "5) 一键安装服务：redis"
 echo "6) 一键安装服务：elasticsearch5.5.2"
 echo "7) 一键安装服务：elasticsearch7.5.1"
 echo "8) 一键安装服务：node8.1.1"
+echo "9) 一键安装服务：node16+php7.3+nginx+apache+mysql(注意该服务与下面的服务php5.4冲突,只能启用一个)"
+echo "10) 一键安装服务：mysql8.0"
+echo "11) 一键安装服务：mongo"
 read menu_select
 case $menu_select in
 1)
@@ -146,6 +149,15 @@ case $menu_select in
 8)
     install_node811
         ;;
+9)
+    install_php73node16
+        ;;
+10)
+    install_mysql80
+        ;;
+11)
+    install_mongo
+        ;;
 esac
 }
 
@@ -164,6 +176,9 @@ echo "5) 一键启动服务：redis"
 echo "6) 一键启动服务：elasticsearch5.5.2"
 echo "7) 一键启动服务：elasticsearch7.5.1"
 echo "8) 一键启动服务：node8.1.1"
+echo "9) 一键启动服务：node16+php7.3+nginx+apache+mysql(注意该服务与下面的服务php5.4冲突,只能启用一个)"
+echo "10) 一键启动服务：mysql8.0"
+echo "11) 一键启动服务：mongo"
 read menu_select
 case $menu_select in
 1)
@@ -190,6 +205,15 @@ case $menu_select in
 8)
 	start_node811
         ;;
+9)
+	start_php73node16
+        ;;
+10)
+	start_mysql80
+        ;;
+11)
+	start_mongo
+        ;;
 esac
 }
 
@@ -208,6 +232,9 @@ echo "5) 一键停止服务：redis"
 echo "6) 一键停止服务：elasticsearch5.5.2"
 echo "7) 一键停止服务：elasticsearch7.5.1"
 echo "8) 一键停止服务：node8.1.1"
+echo "9) 一键停止服务：node16+php7.3+nginx+apache+mysql(注意该服务与下面的服务php5.4冲突,只能启用一个)"
+echo "10) 一键停止服务：mysql80"
+echo "11) 一键停止服务：mongo"
 read menu_select
 case $menu_select in
 1)
@@ -234,6 +261,15 @@ case $menu_select in
 8)
 	stop_node811
         ;;
+9)
+	stop_php73node16
+        ;;
+10)
+	stop_mysql80
+        ;;
+11)
+	stop_mongo
+        ;;
 esac
 }
 
@@ -252,6 +288,9 @@ echo "5) 一键删除服务：redis"
 echo "6) 一键删除服务：elasticsearch5.5.2"
 echo "7) 一键删除服务：elasticsearch7.5.1"
 echo "8) 一键删除服务：node8.1.1"
+echo "9) 一键删除服务：node16+php7.3+nginx+apache+mysql(注意该服务与下面的服务php5.4冲突,只能启用一个)"
+echo "10) 一键删除服务：mysql80"
+echo "11) 一键删除服务：mongo"
 read menu_select
 case $menu_select in
 1)
@@ -277,6 +316,15 @@ case $menu_select in
         ;;
 8)
 	remove_node811
+        ;;
+9)
+	remove_php73node16
+        ;;
+10)
+	remove_mysql80
+        ;;
+11)
+	remove_mongo
         ;;
 esac
 }

@@ -1,0 +1,32 @@
+version: "3"
+#声明一个网络名称,最终网络名称= 项目名称_networks  =>  web_networks ; docker network ls查看
+networks:
+  networks:
+services:
+  mongo3.2:
+    image: mongo:3.2
+    restart: always
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: wind
+      MONGO_INITDB_ROOT_PASSWORD: 123456
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - "8081:8081"
+    environment:
+      #mongo容器名字
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_MONGODB_SERVER: mongo
+#      ME_CONFIG_MONGODB_ADMINUSERNAME: wind
+#      ME_CONFIG_MONGODB_ADMINPASSWORD: 123456
+#      ME_CONFIG_BASICAUTH_USERNAME: wind
+#      ME_CONFIG_BASICAUTH_PASSWORD: 123456
+      ME_CONFIG_MONGODB_URL: mongodb://127.0.0.1:27017/
+ #使用某个网络
+    networks:
+      - networks

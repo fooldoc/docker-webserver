@@ -22,6 +22,8 @@ disable_selinux
 apache_run_path=/usr/local/apache
 #单个安装还是一键全部安装，区别在与配置文件是否加上LoadModule php5_module        modules/libphp5.so,防止单个安装启动不了
 
+ #复制phpn ，快速方面使用命令的 phpn 去除 限制的函数的php.ini 执行
+\cp $php_conf/phpn /usr/local/bin/
 #-------------复制 配置文件----------------
 
 mv $apache_run_path/conf/extra/httpd-vhosts.conf $apache_run_path/conf/extra/httpd-vhosts.conf.old
@@ -189,6 +191,20 @@ if [ -s "${php_config_run_path_origin}/rdkafka.so" ]; then
         echo "安装成功rdkafka！"
 else
         echo "rdkafka 安装失败！请将错误信息发给作者！"
+fi
+
+
+#-------------------mongo--------------
+#设置扩展so的路径
+set_php_extension_dir
+#在php.ini中引入so扩展文件
+set_php_extension_so mongodb.so
+#判断是否存在
+if [ -s "${php_config_run_path_origin}/mongodb.so" ]; then
+        echo "====== mongodb installed successfully,======"
+        echo "安装成功mongodb！"
+else
+        echo "mongodb 安装失败！请将错误信息发给作者！"
 fi
 
 

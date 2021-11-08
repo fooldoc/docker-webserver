@@ -27,6 +27,23 @@ docker-compose build --no-cache
 docker-compose up -d
 }
 
+install_php73node16(){
+cd $compose_base_dir
+docker-compose build
+cd $compose_core_dir/mysql8.0
+docker-compose build
+cd $compose_core_dir/nginx1.8
+docker-compose build
+cd $compose_core_dir/php7apache24
+docker-compose build
+cd $compose_core_dir/php7apache24node16
+docker-compose build
+cd $compose_run_dir/webphp7node
+docker-compose build --no-cache
+docker-compose up -d
+}
+
+
 install_kafka(){
 cd $compose_run_dir/kafka
 docker-compose up -d
@@ -57,3 +74,14 @@ docker-compose build --no-cache
 docker-compose up -d
 }
 
+install_mysql80(){
+cd $compose_run_dir/mysql80
+docker-compose build
+docker-compose up -d
+}
+
+install_mongo(){
+cd $compose_run_dir/mongo
+docker-compose build
+docker-compose up -d
+}

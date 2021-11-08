@@ -8,7 +8,11 @@ stop_php73(){
 cd $compose_run_dir/webphp7
 docker-compose stop
 }
+stop_php73node16(){
+cd $compose_run_dir/webphp7node
+docker-compose stop
 
+}
 stop_kafka(){
 cd $compose_run_dir/kafka
 docker-compose stop
@@ -34,5 +38,17 @@ docker-compose stop
 
 stop_node811(){
 cd $compose_run_dir/node811
+docker-compose stop
+}
+
+
+stop_mysql80(){
+cd $compose_run_dir/mysql80
+docker-compose stop
+}
+
+
+stop_mongo(){
+cd $compose_run_dir/mongo
 docker-compose stop
 }
